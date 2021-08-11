@@ -59,7 +59,7 @@ jobs:
     - name: Create deployment artifact
       env:
         GITHUB_SHA: ${{ github.sha }}
-        run: tar -czf "${GITHUB_SHA}".tar.gz lambda.py
+      run: tar -czf "${GITHUB_SHA}".tar.gz lambda.py
     
     - name: Store artifact for distribution    
       uses: actions/upload-artifact@v2
