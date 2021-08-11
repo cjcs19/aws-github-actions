@@ -57,4 +57,12 @@ jobs:
           AWS_DEFAULT_REGION: us-east-1
           
     - name: Create deployment artifact
-      run: tar -czf app.tar.gz lambda.py
+      env:
+        GITHUB_SHA: ${{ github.sha }}
+        run: tar -czf "${GITHUB_SHA}".tar.gz lambda.py
+    
+    - name: Store artifact for distribution    
+      uses: actions/upload-artifact@v2
+      with:
+        name: app-build
+        path: ${{ github.sha }}.tar.gz
